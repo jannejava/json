@@ -1,0 +1,28 @@
+{
+    "name": "eastwest/json",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jan Ostlund",
+            "email": "janne@eastwest.se"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Eastwest\\Json\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Eastwest\\Json\\Tests\\": "tests/"
+      }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Eastwest\\Json\\JsonServiceProvider"
+            ]
+        }
+    },
+    "require": {}
+}
