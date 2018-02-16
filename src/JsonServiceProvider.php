@@ -3,7 +3,6 @@
 namespace Eastwest\Json;
 
 //use Eastwest\Publisher\Facades\Publisher;
-use Eastwest\Json\Facades as JsonFacade;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
