@@ -13,6 +13,11 @@ use Eastwest\Json\Exceptions\JsonErrorUnknownException;
 
 class Json {
 
+	public function __construct() 
+	{
+		return $this;
+	}
+
 	public function encode($data) 
 	{
 		$json = json_encode($data);
@@ -26,9 +31,9 @@ class Json {
 		return $json;
 	}
 
-	public function decode($json) 
+	public function decode($json, $mode = true) 
 	{
-		$data = json_decode($data);
+		$data = json_decode($json, $mode);
 		
 		try {
 			$this->getLastError();
