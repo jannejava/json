@@ -18,9 +18,13 @@ class Json {
 		return $this;
 	}
 
-	public function encode($data) 
+	public function encode($data, $pretty = false) 
 	{
-		$json = json_encode($data);
+		if($pretty == true) {
+			$json = json_encode($data, JSON_PRETTY_PRINT);
+		} else {
+			$json = json_encode($data);
+		}
 		
 		try {
 			$this->getLastError();
