@@ -1,10 +1,10 @@
 <?php
 
-namespace Eastwest\Json;
+namespace Eastwest\Json\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class JsonFacade extends Facade
+class Json extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +13,6 @@ class JsonFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'json';
+        return 'json.encode.decode';
     }
 }
