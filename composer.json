@@ -1,7 +1,6 @@
 {
     "name": "eastwest/json",
     "type": "library",
-    "version": "1.0",
     "authors": [
         {
             "name": "Jan Östlund",
