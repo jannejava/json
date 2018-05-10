@@ -31,7 +31,7 @@ class Json
 
     public function decode($json, $assoc = true)
     {
-        $data = json_decode($json, $mode);
+        $data = json_decode($json, $assoc);
 
         try {
             $this->getLastError();

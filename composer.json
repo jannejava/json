@@ -9,7 +9,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "Eastwest\\Json\\": "src/"
+            "Eastwest\\Json\\": "src/",
+            "Eastwest\\Tests\\": "tests/"
         }
     },
     "autoload-dev": {
@@ -24,5 +25,8 @@
             ]
         }
     },
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "orchestra/testbench": "~3.0"
+    }
 }
