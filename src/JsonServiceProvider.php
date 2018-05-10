@@ -2,7 +2,6 @@
 
 namespace Eastwest\Json;
 
-//use Eastwest\Publisher\Facades\Publisher;
 use Illuminate\Support\ServiceProvider;
 
 class JsonServiceProvider extends ServiceProvider

@@ -2,13 +2,8 @@
 
 namespace Eastwest\Json;
 
-use Eastwest\Json\Exceptions\JsonEncodeDecodeException;
-use Eastwest\Json\Exceptions\JsonErrorCtrlCharException;
-use Eastwest\Json\Exceptions\JsonErrorDepthException;
-use Eastwest\Json\Exceptions\JsonErrorMalformedUft8Exception;
-use Eastwest\Json\Exceptions\JsonErrorStateMismatchException;
-use Eastwest\Json\Exceptions\JsonErrorSyntaxException;
-use Eastwest\Json\Exceptions\JsonErrorUnknownException;
+use Eastwest\Json\Exceptions\Depth;
+use Eastwest\Json\Exceptions\EncodeDecode;
 
 class Json
 {
@@ -27,14 +22,14 @@ class Json
 
         try {
             $this->getLastError();
-        } catch (JsonEncodeDecodeException $e) {
+        } catch (EncodeDecode $e) {
             throw $e;
         }
 
         return $json;
     }
 
-    public function decode($json, $mode = true)
+    public function decode($json, $assoc = true)
     {
         $data = json_decode($json, $mode);
 
@@ -54,22 +49,47 @@ class Json
                 return null;
                 break;
             case JSON_ERROR_DEPTH:
-                throw new JsonErrorDepthException();
+                throw EncodeDecode::depth();
                 break;
+
             case JSON_ERROR_STATE_MISMATCH:
-               throw new JsonErrorStateMismatchException();
+                throw EncodeDecode::stateMismatch();
                 break;
+
             case JSON_ERROR_CTRL_CHAR:
-                throw new JsonErrorCtrlCharException();
+                throw EncodeDecode::ctrlChar();
                 break;
+
             case JSON_ERROR_SYNTAX:
-                throw new JsonErrorSyntaxException();
+                throw EncodeDecode::syntax();
                 break;
+
             case JSON_ERROR_UTF8:
-                throw new JsonErrorMalformedUft8Exception();
+                throw EncodeDecode::utf8();
                 break;
+
+            case JSON_ERROR_RECURSION:
+                throw EncodeDecode::recursion();
+                break;
+
+            case JSON_ERROR_INF_OR_NAN:
+                throw EncodeDecode::infOrNan();
+                break;
+
+            case JSON_ERROR_UNSUPPORTED_TYPE:
+                throw EncodeDecode::unsupportedType();
+                break;
+
+            case JSON_ERROR_INVALID_PROPERTY_NAME:
+                throw EncodeDecode::invalidPropertyName();
+                break;
+
+            case JSON_ERROR_UTF16:
+                throw EncodeDecode::utf16();
+                break;
+
             default:
-                throw new JsonErrorUnknownException();
+                throw EncodeDecode::unknown();
                 break;
         }
     }
