@@ -11,7 +11,12 @@ $json = Json::encode(['key' => 'value]);
 // Returned objects will be converted into associative arrays. Default is true.
 
 $array = Json::decode('{"key1":"value1","key2":"value2"}');
-
 $array = Json::decode('{"key1":"value1","key2":"value2"}', false);
+
+// Execeptions imitiatly thrown. You can catch these if you want.
+
+$array = Json::decode('ASDasdASDasdASD');
+
+// Eastwest\Json\Exceptions\EncodeDecode: Syntax error
 
 ```
