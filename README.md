@@ -1,11 +1,5 @@
 # Json Wrapper for Laravel
 
-Install
-
-```
-composer require eastwest/json
-```
-
 A simple wrapper around `json_encode()` and `json_decode()` for catching any errors without executing `json_last_error()`.
 
 ```php
@@ -34,4 +28,10 @@ $array = Json::decode('ASDasdASDasdASD');
 
 // Eastwest\Json\Exceptions\EncodeDecode: Syntax error
 
+```
+
+## Installation
+
+```
+composer require eastwest/json
 ```
