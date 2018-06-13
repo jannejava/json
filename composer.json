@@ -1,6 +1,6 @@
 {
     "name": "eastwest/json",
-    "type": "library",
+    "type": "package",
     "authors": [
         {
             "name": "Jan Östlund",
@@ -9,8 +9,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Eastwest\\Json\\": "src/",
-            "Eastwest\\Tests\\": "tests/"
+            "Eastwest\\Json\\": "src/"
         }
     },
     "autoload-dev": {
@@ -18,15 +17,10 @@
             "Eastwest\\Json\\Tests\\": "tests/"
       }
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Eastwest\\Json\\JsonServiceProvider"
-            ]
-        }
+    "require": {
+        "php": ">=7.0"
     },
-    "require": {},
     "require-dev": {
-        "orchestra/testbench": "~3.0"
+        "phpunit/phpunit": "^7.2"
     }
 }

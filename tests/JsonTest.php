@@ -2,24 +2,43 @@
 
 namespace Eastwest\Json\Tests;
 
-use Eastwest\Json\Facades\Json;
-use Eastwest\Json\Exceptions\EncodeDecode;
-
+use Eastwest\Json\Json;
+use PHPUnit\Framework\TestCase;
 
 class JsonTest extends TestCase
 {
-    public function test_valid_json_is_returned() {
-        $json = Json::encode(['key1' => 'value1', 'key2' => 'value2']);
-        $this->assertEquals('{"key1":"value1","key2":"value2"}', $json);
+    /** @test */
+    public function decodes_valid_json()
+    {
+        $this->assertEquals((object) ['key' => 'value'], Json::decode('{"key":"value"}'));
+        $this->assertSame(['key' => 'value'], Json::decode('{"key":"value"}', true));
     }
 
-    public function test_valid_array_from_json_returned() { 
-        $array = Json::decode('{"key1":"value1","key2":"value2"}');
-        $this->assertEquals(['key1' => 'value1', 'key2' => 'value2'],$array);
+    /** @test */
+    public function encodes_json()
+    {
+        $this->assertSame('{"key":"value"}', Json::encode(['key' => 'value']));
     }
 
-    public function test_syntax_error_json() {
-        $this->expectException(EncodeDecode::class);
-        $array = Json::decode('asdflue2"}');
+    /**
+     * @test
+     * @expectedException \Eastwest\Json\JsonException
+     * @expectedExceptionCode JSON_ERROR_SYNTAX
+     * @expectedExceptionMessage Syntax error
+     */
+    public function throws_exception_with_code_and_message_upon_decoding_error()
+    {
+        Json::decode('{faulty json}');
+    }
+
+    /**
+     * @test
+     * @expectedException \Eastwest\Json\JsonException
+     * @expectedExceptionCode JSON_ERROR_UNSUPPORTED_TYPE
+     * @expectedExceptionMessage Value of a type that cannot be encoded was given
+     */
+    public function throws_exception_with_code_and_message_upon_encoding_error()
+    {
+        Json::encode(tmpfile());
     }
 }
