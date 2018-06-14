@@ -1,6 +1,5 @@
 {
     "name": "eastwest/json",
-    "type": "package",
     "authors": [
         {
             "name": "Jan Östlund",
