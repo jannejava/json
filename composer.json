@@ -1,5 +1,7 @@
 {
     "name": "eastwest/json",
+    "description": "Wrap JSON encoding/decoding errors in exception",
+    "license": "MIT",
     "authors": [
         {
             "name": "Jan Östlund",
