@@ -16,3 +16,24 @@ try {
     echo $e->getCode();
 }
 ```
+
+## Installation
+You'll have to follow a couple of simple steps to install this package.
+
+### Downloading
+Via [composer](http://getcomposer.org):
+
+```bash
+$ composer require eastwest/json:^3.0
+```
+
+Or add the package to your development dependencies in `composer.json` and run
+`composer update sven/artisan-view` to download the package:
+
+```json
+{
+    "require": {
+        "eastwest/json": "^3.0"
+    }
+}
+```
