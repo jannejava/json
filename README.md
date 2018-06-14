@@ -28,7 +28,7 @@ $ composer require eastwest/json:^3.0
 ```
 
 Or add the package to your development dependencies in `composer.json` and run
-`composer update sven/artisan-view` to download the package:
+`composer update eastwest/json` to download the package:
 
 ```json
 {
