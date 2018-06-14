@@ -2,95 +2,52 @@
 
 namespace Eastwest\Json;
 
-use Eastwest\Json\Exceptions\Depth;
-use Eastwest\Json\Exceptions\EncodeDecode;
-
+/**
+ * Wrapper for json_encode() and json_decode() that throws exception on error.
+ */
 class Json
 {
-    public function __construct()
+    /**
+     * Encode value to JSON string.
+     *
+     * @param  mixed $value     Anything but resource
+     * @param  int $options     @link http://php.net/manual/en/json.constants.php
+     * @param  int $depth
+     * @return string
+     * @throws \Eastwest\Json\JsonException
+     */
+    public static function encode($value, int $options = 0, int $depth = 512) : string
     {
-        return $this;
-    }
+        $json = json_encode($value, $options, $depth);
 
-    public function encode($data, $pretty = false)
-    {
-        if ($pretty == true) {
-            $json = json_encode($data, JSON_PRETTY_PRINT);
-        } else {
-            $json = json_encode($data);
-        }
-
-        try {
-            $this->getLastError();
-        } catch (EncodeDecode $e) {
-            throw $e;
+        $error = json_last_error();
+        if ($error !== JSON_ERROR_NONE) {
+            throw JsonException::encoding($value, $error);
         }
 
         return $json;
     }
 
-    public function decode($json, $assoc = true)
+    /**
+     * Decode JSON string.
+     *
+     * @param  string $json
+     * @param  bool $as_array
+     * @param  int $depth
+     * @param  int $options     JSON_BIGINT_AS_STRING|JSON_OBJECT_AS_ARRAY - latter is redundant,
+     *                          ie. has the same effect as passing true as 2nd param $as_array.
+     * @return \StdClass|array
+     * @throws \Eastwest\Json\JsonException
+     */
+    public static function decode(string $json, $as_array = false, int $depth = 512, int $options = 0)
     {
-        $data = json_decode($json, $assoc);
+        $decoded = json_decode($json, $as_array, $depth, $options);
 
-        try {
-            $this->getLastError();
-        } catch (\Exception $e) {
-            throw $e;
+        $error = json_last_error();
+        if ($error !== JSON_ERROR_NONE) {
+            throw JsonException::decoding($json, $error);
         }
 
-        return $data;
-    }
-
-    protected function getLastError()
-    {
-        switch (json_last_error()) {
-            case JSON_ERROR_NONE:
-                return null;
-                break;
-            case JSON_ERROR_DEPTH:
-                throw EncodeDecode::depth();
-                break;
-
-            case JSON_ERROR_STATE_MISMATCH:
-                throw EncodeDecode::stateMismatch();
-                break;
-
-            case JSON_ERROR_CTRL_CHAR:
-                throw EncodeDecode::ctrlChar();
-                break;
-
-            case JSON_ERROR_SYNTAX:
-                throw EncodeDecode::syntax();
-                break;
-
-            case JSON_ERROR_UTF8:
-                throw EncodeDecode::utf8();
-                break;
-
-            case JSON_ERROR_RECURSION:
-                throw EncodeDecode::recursion();
-                break;
-
-            case JSON_ERROR_INF_OR_NAN:
-                throw EncodeDecode::infOrNan();
-                break;
-
-            case JSON_ERROR_UNSUPPORTED_TYPE:
-                throw EncodeDecode::unsupportedType();
-                break;
-
-            case JSON_ERROR_INVALID_PROPERTY_NAME:
-                throw EncodeDecode::invalidPropertyName();
-                break;
-
-            case JSON_ERROR_UTF16:
-                throw EncodeDecode::utf16();
-                break;
-
-            default:
-                throw EncodeDecode::unknown();
-                break;
-        }
+        return $decoded;
     }
 }
