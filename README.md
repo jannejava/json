@@ -38,4 +38,4 @@ Or add the package to your development dependencies in `composer.json` and run
 }
 ```
 
-*If you need a way to deploy files or manage your Laravel Forge servers. Take a look at [GitFTP-Deploy](https://gitftp-deploy.com) or [F-Bar](https://laravel-forge-menubar.com)
+*If you need a way to deploy files or manage your Laravel Forge servers. Take a look at [GitFTP-Deploy](https://gitftp-deploy.com) or [F-Bar](https://laravel-forge-menubar.com)*
