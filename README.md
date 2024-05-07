@@ -1,6 +1,6 @@
 # Wrap JSON encoding/decoding errors in exception
 
-A simple wrapper around `json_encode()` and `json_decode()` for catching any errors without executing `json_last_error()`. In PHP 7.3 these functions will [throw an exception](https://laravel-news.com/php-7-3-json-error-handling).
+Catch `json_encode()` and `json_decode()` errors without executing `json_last_error()`. In PHP 7.3 these functions will [throw an exception](https://laravel-news.com/php-7-3-json-error-handling).
 
 ```php
 
